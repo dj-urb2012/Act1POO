@@ -195,6 +195,8 @@ public class FrmRegistro extends javax.swing.JFrame {
 
     private void jBtnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRegistrarseActionPerformed
         // TODO add your handling code here:
+        //Obtener datos de los campos
+        //Primera parte
         String nombres = jTfNom.getText();
         String apellidos = jTfApe.getText();
         int anioNac = (int) jSAnioNac.getValue();
@@ -203,29 +205,37 @@ public class FrmRegistro extends javax.swing.JFrame {
         String correo = jTfCorreo.getText();
         char[] passwd = jP1.getPassword();
         char[] confirmar = jP2.getPassword();
+        //Instanciar objeto operacion
         Operacion op = new Operacion(nombres, apellidos, anioNac, mesNac, correo, passwd);
+        
+        //Mantiene el valor true si no existe ningun error al momento de llenar el formulario
         boolean puedeRegistrarse = true;
         
+        //Verifica si el usuario es mayor a 13 años de edad
         if(op.verificarEdad() == false) {
             JOptionPane.showMessageDialog(this, "Debes ser mayor a 13 años para registrarte", "Error", JOptionPane.INFORMATION_MESSAGE);
             puedeRegistrarse = false;
         }
         
+        //Verifica que el correo ingresado sea valido
         if(op.verificarCorreo() == false) {
             JOptionPane.showMessageDialog(this, "El correo debe contener '@' y '.com'", "Error", JOptionPane.INFORMATION_MESSAGE);
             puedeRegistrarse = false;
         }
         
+        //Verifica que la contraseña posea al menos 5 caracteres
         if(op.verificarTamCadena() == false) {
             JOptionPane.showMessageDialog(this, "La contraseña debe tener por lo menos 5 caracteres", "Error", JOptionPane.INFORMATION_MESSAGE);
             puedeRegistrarse = false;
         }
         
+        //Verifica que el campo de la contraseña y el de confirmar contraseña sean identicos
         if(op.confirmarPasswd(confirmar) == false) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.INFORMATION_MESSAGE);
             puedeRegistrarse = false;
         }
-       
+        
+       //Si no existe ningun error, Se muestra un mensaje confirmando que se pudo registrar exitosamente
         if(puedeRegistrarse) {
             JOptionPane.showMessageDialog(this, "Datos guardados exitosamente", "Error", JOptionPane.INFORMATION_MESSAGE);
         }

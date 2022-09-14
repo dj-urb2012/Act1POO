@@ -20,7 +20,7 @@ public class Operacion {
     public Operacion(String nombres, String apellidos, int anioNac, String mesNac, String email, char[] password) {
         this.persona = new Persona(nombres, apellidos, anioNac, mesNac, email, password);
     }
-    
+    //Asigna un numero a cada mes (1 - 12)
     public int asignarNumMes(String mes) {
         switch(mes) {
             case "Enero":
@@ -51,6 +51,7 @@ public class Operacion {
        return 0;
     } 
     
+    //Verificar que el usuario sea mayor de 13 años, teniendo en cuenta el mes de nacimiento
     public int obtenerEdad() {
         int anioActual = 2022;
         int edad = anioActual - persona.getAnioNac();
@@ -60,7 +61,7 @@ public class Operacion {
         }
         return anioActual - persona.getAnioNac();
     }
-    
+    //Retorna verdadero solo si el usuario es mayor a 13 años
     public boolean verificarEdad() {
         int edad = this.obtenerEdad();
         if(edad > 13) {
@@ -68,7 +69,7 @@ public class Operacion {
         }
         return false;
     }
-    
+    //Verifica que el correo a crearse sea valido
     public boolean verificarCorreo() {
         String correo = persona.getEmail();
         if(correo.contains("@") && correo.contains(".com")) {
@@ -76,7 +77,7 @@ public class Operacion {
         }
         return false;
     }
-    
+    //Detecta si ambas cadenas son iguales, de este modo se podra saber si ambos campos son iguales
     public boolean confirmarPasswd(char[] cadena) {
         String contra = new String(persona.getPassword());
         String conf = new String(cadena);
@@ -85,7 +86,7 @@ public class Operacion {
         }
         return false;
     }
-    
+    //Verifica si el largo de la cadena es menor a 5 caracteres
     public boolean verificarTamCadena() {
         String contra = new String(persona.getPassword());
         if(contra.length() <= 4) {
